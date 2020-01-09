@@ -1,12 +1,15 @@
 #include "ofApp.h"
 
 //--------------------------------------------------------------
+ofFbo fbo;
+bool d = true;
 void ofApp::setup(){
     rectangles.setup();
     circles.setup();
     lines.setup();
     triangles.setup();
     
+	fbo.allocate(ofGetWindowWidth(), ofGetWindowHeight(), GL_RGBA);
 }
 
 //--------------------------------------------------------------
@@ -19,10 +22,19 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    rectangles.draw();
-    circles.draw();
-    lines.draw();
-    triangles.draw();
+	if (d) {
+		fbo.begin();
+		rectangles.draw();
+		circles.draw();
+		lines.draw();
+		triangles.draw();
+		fbo.end();
+		d = false;
+	}
+	else {
+		fbo.draw(0, 0);
+	}
+
 }
 
 //--------------------------------------------------------------
