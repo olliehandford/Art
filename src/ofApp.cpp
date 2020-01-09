@@ -24,8 +24,8 @@ void ofApp::update(){
 void ofApp::draw(){
 	if (d) {
 		fbo.begin();
-		rectangles.draw();
 		circles.draw();
+		rectangles.draw();
 		lines.draw();
 		triangles.draw();
 		fbo.end();
